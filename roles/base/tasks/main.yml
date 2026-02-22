@@ -17,10 +17,8 @@
   import_tasks: aur.yml
   tags: aur
 
-- name: Setup CachyOS repository
-  import_tasks: cachyos.yml
-  tags: cachyos
+- name: Setup AUR helper user
+  import_tasks: aur_user.yml
+  tags: aur-user
 
-- name: Install audio dependencies
-  import_tasks: audio.yml
-  tags: audio
+

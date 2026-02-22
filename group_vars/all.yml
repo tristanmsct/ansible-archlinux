@@ -42,3 +42,13 @@ cursor_theme: "Adwaita"
 
 # SSH settings
 ssh_key_type: "ed25519"
+
+aur:
+    user: aur_builder
+    packages:
+        - yay
+        - downgrade
+        - zplug
+        - miller
+        - myrepos
+        - ctmg

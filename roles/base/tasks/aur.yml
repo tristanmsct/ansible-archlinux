@@ -32,6 +32,6 @@
   tags:
     - aur
 
-- name: AUR install clean up
-  command: yay -Yc
-  become: true
+# - name: AUR install clean up
+#   command: yay -Yc
+#   become: true

@@ -5,7 +5,10 @@
 
   roles:
     - { role: base, tags: ['base'] }
+    - { role: audio, tags: ['audio'] }
+    - { role: bluetooth, tags: ['bluetooth'] }
     - { role: hyprland, tags: ['hyprland'] }
+    - { role: cachyos, tags: ['cachyos'] }
     - { role: git, tags: ['git'] }
     - { role: bitwarden, tags: ['bitwarden'] }
     - { role: theming, tags: ['theming'] }

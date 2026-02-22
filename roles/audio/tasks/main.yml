@@ -11,5 +11,15 @@
     state: present
     update_cache: yes
   become: true
-  tags:
-    - audio
+
+- name: Start Apache service
+  ansible.builtin.service:
+    name: pipewire
+    state: started
+    scope: user
+
+- name: Start Apache service
+  ansible.builtin.service:
+    name: wireplumber
+    state: started
+    scope: user

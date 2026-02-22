@@ -1,0 +1,21 @@
+---
+- name: Install bluetooth dependencies
+  pacman:
+    name:
+      - bluez
+      - bluez-utils
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install AUR base packages
+  kewlfft.aur.aur:
+    name:
+      - adw-bluetooth
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Start Apache service
+  ansible.builtin.service:
+    name: bluetooth
+    state: started
