@@ -1,0 +1,16 @@
+---
+- name: Install Orchis GDK Theme
+  import_tasks: orchis.yml
+  tags: orchis
+
+- name: Install Tela Circle icon Theme
+  import_tasks: tela_circle.yml
+  tags: tela-circle
+
+- name: Install Grub Tela Theme
+  import_tasks: grub_theme.yml
+  tags: grub-theme
+
+- name: Install Vimix Cursors
+  import_tasks: vimix_cursors.yml
+  tags: vimix_cursors

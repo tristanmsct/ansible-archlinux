@@ -1,0 +1,47 @@
+---
+- name: Set Grub Tela variables
+  set_fact:
+    repo_url: "git@github.com:tristanmsct/grub-theme-git.git"
+    repo_dest: "{{ user_home }}/.local/share/aur/grub-theme-git"
+    check_path: "/boot/grub/themes/tela"
+  tags:
+    - grub-theme
+
+- name: Check if Grub Tela theme is already installed
+  stat:
+    path: "{{ check_path }}"
+  register: grub_theme_installed
+  tags:
+    - grub-theme
+
+- name: Install Grub Tela Theme
+  block:
+    - name: Clone Grub Tela repo
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ repo_dest }}"
+        update: yes
+
+    - name: Run makepkg
+      command:
+        cmd: makepkg -si --noconfirm
+        chdir: "{{ repo_dest }}"
+      become: false
+
+    - name: Cleanup makepkg build artifacts
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ repo_dest }}/src"
+        - "{{ repo_dest }}/pkg"
+
+    - name: Cleanup makepkg package files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop: "{{ lookup('fileglob', repo_dest + '/*.pkg.tar.zst', repo_dest + '/*.src.tar.gz', wantlist=True) }}"
+
+  when: not grub_theme_installed.stat.exists
+  tags:
+    - grub-theme

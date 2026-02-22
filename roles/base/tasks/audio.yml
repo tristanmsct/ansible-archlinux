@@ -1,0 +1,15 @@
+---
+- name: Install audio dependencies
+  pacman:
+    name:
+      - pipewire
+      - pipewire-pulse
+      - pipewire-alsa
+      - pipewire-jack
+      - sof-firmware
+      - alsa-utils
+    state: present
+    update_cache: yes
+  become: true
+  tags:
+    - audio

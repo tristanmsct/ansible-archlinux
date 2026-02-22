@@ -1,0 +1,26 @@
+---
+- name: Install base packages
+  pacman:
+    name:
+      - git
+      - kitty
+      - nautilus
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Configure pacman
+  import_tasks: pacman.yml
+  tags: pacman
+
+- name: Setup AUR helper
+  import_tasks: aur.yml
+  tags: aur
+
+- name: Setup CachyOS repository
+  import_tasks: cachyos.yml
+  tags: cachyos
+
+- name: Install audio dependencies
+  import_tasks: audio.yml
+  tags: audio

@@ -1,0 +1,8 @@
+---
+- name: Install Vimix Cursors
+  pacman:
+    name:
+      - vimix-cursors
+    state: present
+    update_cache: yes
+  become: true

@@ -1,0 +1,15 @@
+---
+- name: Install bluetooth dependencies
+  pacman:
+    name:
+      - bluez
+      - bluez-utils
+    state: present
+    update_cache: yes
+  become: true
+  tags:
+    - audio
+
+# Install adw-bluetooth using the AUR
+
+# Enable bluetooth services.
