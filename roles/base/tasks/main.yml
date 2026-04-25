@@ -20,5 +20,3 @@
 - name: Setup AUR helper user
   import_tasks: aur_user.yml
   tags: aur-user
-
-

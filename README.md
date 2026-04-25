@@ -15,15 +15,33 @@ ansible-playbook playbook.yml -K --skip-tags backup
 
 TODO :
 
-- [ ] Shell installation and customisations
-- [ ] SDDM
-- [ ] Terminal tools
+- [X] Pacman config
+- [X] AUR helper
+- [x] Backup tools
+- [ ] GRUB theming + silence boot logs
+- [ ] Cachyos
+- [ ] Boot optimisation and general performance
+- [ ] Systemd hardening
+- [ ] Intel specific installs
+- [ ] System and CLI tools
+    - [ ] Reflector
+    - [ ] Terminal
+    - [ ] Firewall
+    - [ ] TLP
+    - [X] Audio
+    - [X] Bluetooth
+    - [ ] Git
+    - [ ] Docker
+    - [ ] Python
+    - [ ] Gotask
+    - [ ] Trash management
+    - [ ] Misc
+    - [X] Terminal tools cli
+    - [ ] Other
 - [ ] Hyprland in general
-- [ ] Grub
-- [ ] Firewall
-- [ ] Touch screen specific stuff
-- [ ] Boot and system optimisations
-- [ ] System hardening
-- [ ] Dotfiles
-- [ ] Nextcloud
-- [ ] Printer stuff
+    - [ ] Dotfiles
+    - [ ] SDDM
+    - [ ] Touch screen specific stuff
+- [ ] Software
+    - [ ] Nextcloud
+    - [ ] Printer stuff

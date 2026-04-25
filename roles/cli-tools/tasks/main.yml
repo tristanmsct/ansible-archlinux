@@ -1,0 +1,19 @@
+---
+- name: Install CLI tools
+  pacman:
+    name:
+      - fzf
+      - zoxide
+      - fd
+      - eza
+      - bat
+      - git-delta
+      - ripgrep
+      - ncdu
+      - glow
+      - tldr
+      - thefuck
+      - btop
+    state: present
+    update_cache: yes
+  become: true

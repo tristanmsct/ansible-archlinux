@@ -1,0 +1,9 @@
+---
+- name: Install backup tools
+  pacman:
+    name:
+      - timeshift
+      - pika-backup
+    state: present
+    update_cache: yes
+  become: true
