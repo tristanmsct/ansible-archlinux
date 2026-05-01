@@ -1,0 +1,81 @@
+---
+- name: Ensure NetworkManager drop-in dir exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/NetworkManager.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Harden NetworkManager service
+  ansible.builtin.template:
+    src: networkmanager/hardening.conf.j2
+    dest: /etc/systemd/system/NetworkManager.service.d/hardening.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify:
+    - daemon reload
+    - restart networkmanager
+
+- name: Ensure Alsa-state drop-in dir exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/alsa-state.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Harden Alsa-state service
+  ansible.builtin.template:
+    src: alsa-state/hardening.conf.j2
+    dest: /etc/systemd/system/alsa-state.service.d/hardening.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Ensure Auditd drop-in dir exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/auditd.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Harden Auditd service
+  ansible.builtin.template:
+    src: auditd/hardening.conf.j2
+    dest: /etc/systemd/system/auditd.service.d/hardening.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify:
+    - daemon reload
+    # - restart auditd
+
+- name: Ensure Bluetooth drop-in dir exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/bluetooth.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Harden Bluetooth service
+  ansible.builtin.template:
+    src: bluetooth/hardening.conf.j2
+    dest: /etc/systemd/system/bluetooth.service.d/hardening.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  notify:
+    - daemon reload
+    - restart bluetooth

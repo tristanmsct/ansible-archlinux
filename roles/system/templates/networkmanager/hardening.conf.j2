@@ -1,0 +1,18 @@
+[Unit]
+After=systemd-sysctl.service systemd-sysusers.service systemd-tmpfiles-setup.service
+
+[Service]
+# Process protection that won't break networking
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectHome=true
+ProtectKernelTunables=false
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictRealtime=true
+MemoryDenyWriteExecute=true
+
+# Carefully allow system calls needed for networking
+SystemCallArchitectures=native

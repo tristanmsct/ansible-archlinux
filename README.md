@@ -15,33 +15,42 @@ ansible-playbook playbook.yml -K --skip-tags backup
 
 TODO :
 
-- [X] Pacman config
-- [X] AUR helper
-- [x] Backup tools
-- [ ] GRUB theming + silence boot logs
-- [ ] Cachyos
-- [ ] Boot optimisation and general performance
-- [ ] Systemd hardening
-- [ ] Intel specific installs
-- [ ] System and CLI tools
-    - [ ] Reflector
-    - [ ] Terminal
-    - [ ] Firewall
-    - [ ] TLP
+- [ ] Base
+    - [X] Pacman config + pacman hhok silence boot logs + Reflector
+    - [X] AUR helper
+    - [ ] Bitwarden ?
+- [ ] System
+    - [X] Boot optimisation and general performance
+    - [x] Systemd hardening
+    - [X] Cachyos
+- [ ] Hardware
     - [X] Audio
     - [X] Bluetooth
+    - [X] CPU
+    - [ ] Touch screen specific stuff
+- [ ] Desktop
+    - [ ] Hyprland in general
+    - [ ] Dotfiles
+    - [ ] SDDM
+- [X] Theming
+    - [X] GRUB theming
+    - [X] Orchis
+    - [X] Vimix cursor
+    - [X] Tela circle
+- [ ] Dev
     - [ ] Git
     - [ ] Docker
     - [ ] Python
     - [ ] Gotask
-    - [ ] Trash management
     - [ ] Misc
-    - [X] Terminal tools cli
+- [ ] CLIs
+    - [X] Terminal
+    - [ ] Tools
+    - [x] Backup tools
+    - [ ] Trash management
+    - [ ] Firewall
+    - [ ] TLP
     - [ ] Other
-- [ ] Hyprland in general
-    - [ ] Dotfiles
-    - [ ] SDDM
-    - [ ] Touch screen specific stuff
-- [ ] Software
+- [ ] Apps
     - [ ] Nextcloud
     - [ ] Printer stuff

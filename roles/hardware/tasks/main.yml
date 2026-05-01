@@ -1,0 +1,12 @@
+---
+- name: Install CPU vendor specific packages
+  import_tasks: cpu.yml
+  tags: cpu
+
+- name: Configure audio
+  import_tasks: audio.yml
+  tags: audio
+
+- name: Configure bluetooth
+  import_tasks: bluetooth.yml
+  tags: bluetooth

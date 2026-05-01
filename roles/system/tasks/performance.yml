@@ -1,0 +1,70 @@
+---
+- name: Mask NetworkManager wait online service
+  ansible.builtin.systemd_service:
+    name: NetworkManager-wait-online.service
+    masked: yes
+
+- name: Create systemd timeout config
+  ansible.builtin.copy:
+    dest: /etc/systemd/system.conf.d/timeout.conf
+    content: |
+      [Manager]
+      DefaultTimeoutStartSec=10s
+      DefaultTimeoutStopSec=10s
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Set swappiness
+  ansible.builtin.copy:
+    dest: /etc/sysctl.d/99-swappiness.conf
+    content: |
+      vm.swappiness=10
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Install ZRAM package
+  pacman:
+    name:
+      - zram-generator
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Configure ZRAM
+  ansible.builtin.copy:
+    dest: /etc/systemd/zram-generator.conf
+    content: |
+      [zram0]
+      zram-size = ram / 2
+      compression-algorithm = zstd
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Check BFQ available
+  ansible.builtin.command: grep -q bfq /sys/block/nvme0n1/queue/scheduler
+  register: bfq_check
+  failed_when: false
+  changed_when: false
+  become: yes
+
+- name: Set BFQ I/O scheduler for NVMe drives
+  ansible.builtin.copy:
+    dest: /etc/udev/rules.d/60-ioschedulers.rules
+    content: |
+      ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ATTR{queue/scheduler}="bfq"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  when: bfq_check.rc == 0
+
+- name: Reload udev rules
+  ansible.builtin.command: udevadm control --reload-rules
+  become: yes
+  changed_when: false

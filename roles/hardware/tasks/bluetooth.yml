@@ -16,6 +16,6 @@
   become_user: "{{ aur.user }}"
 
 - name: Start Apache service
-  ansible.builtin.service:
+  ansible.builtin.systemd_service:
     name: bluetooth
     state: started

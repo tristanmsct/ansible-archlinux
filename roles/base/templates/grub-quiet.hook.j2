@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = linux
+Target = linux-lts
+Target = linux-cachyos
+
+[Action]
+Description = Commenting out echo statements in grub.cfg...
+When = PostTransaction
+Exec = /bin/sh -c 'sed -i "s/^\techo/\t# echo/g" /boot/grub/grub.cfg'

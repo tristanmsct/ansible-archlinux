@@ -1,0 +1,23 @@
+[Service]
+# Note: Many protections are not appropriate for this service as noted in the report
+# But we can still add several security enhancements
+
+# Process restrictions
+NoNewPrivileges=true
+ProtectControlGroups=true
+ProtectKernelTunables=true
+ProtectKernelLogs=false
+ProtectKernelModules=true
+RestrictSUIDSGID=true
+ProtectHostname=true
+PrivateNetwork=false
+PrivateUsers=false
+
+# System call architectures
+SystemCallArchitectures=native
+
+# Restrict namespace creation
+RestrictNamespaces=true
+
+# Set maximum capabilities
+CapabilityBoundingSet=CAP_AUDIT_CONTROL CAP_AUDIT_READ CAP_DAC_READ_SEARCH CAP_SYSLOG CAP_SYS_ADMIN

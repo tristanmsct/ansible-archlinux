@@ -1,0 +1,12 @@
+---
+- name: Install and configure a terminal emulator
+  import_tasks: terminal.yml
+  tags: terminal
+
+- name: Install backup tools
+  import_tasks: backups.yml
+  tags: backups
+
+- name: Install terminal tools
+  import_tasks: tools.yml
+  tags: cli-tools

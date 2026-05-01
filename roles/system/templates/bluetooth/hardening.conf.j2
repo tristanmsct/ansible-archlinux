@@ -1,0 +1,28 @@
+[Service]
+# Basic protections
+NoNewPrivileges=true
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectKernelModules=true
+PrivateTmp=true
+
+# Keep network access - Bluetooth needs this
+PrivateNetwork=false
+
+# Don't restrict devices - Bluetooth needs hardware access
+PrivateDevices=false
+
+# Process restrictions
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictRealtime=true
+MemoryDenyWriteExecute=true
+
+# System call filtering - limited to allow Bluetooth functionality
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+
+# Don't restrict namespaces Bluetooth might use
+RestrictNamespaces=~net

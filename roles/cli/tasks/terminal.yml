@@ -1,0 +1,65 @@
+- name: Install kitty terminal emulator
+  pacman:
+    name:
+      - kitty
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install oh-my-zsh
+  ansible.builtin.command:
+    cmd: yay -S --noconfirm --needed {{ item }}
+  become: yes
+  become_user: aur_builder
+  loop:
+    - oh-my-zsh-git
+  register: yay_result
+  changed_when: "'nothing to do' not in yay_result.stdout"
+
+- name: Install other zsh plugins
+  pacman:
+    name:
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install other zsh plugins from the AUR
+  ansible.builtin.command:
+    cmd: yay -S --noconfirm --needed {{ item }}
+  become: yes
+  become_user: aur_builder
+  loop:
+    - zsh-fast-syntax-highlighting
+  register: yay_result
+  changed_when: "'nothing to do' not in yay_result.stdout"
+
+- name: Install zsh themes
+  ansible.builtin.command:
+    cmd: yay -S --noconfirm --needed {{ item }}
+  become: yes
+  become_user: aur_builder
+  loop:
+    - zsh-theme-powerlevel10k-git
+    - oh-my-posh
+  register: yay_result
+  changed_when: "'nothing to do' not in yay_result.stdout"
+
+- name: Configure ZDOTDIR in /etc/zsh/zshenv
+  ansible.builtin.copy:
+    dest: /etc/zsh/zshenv
+    content: |
+      if [[ -d "$HOME/.config/shell/zsh" ]]; then
+        export ZDOTDIR="$HOME/.config/shell/zsh"
+      fi
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Set zsh as default shell
+  ansible.builtin.user:
+    name: "{{ ansible_facts['user_id'] }}"
+    shell: /bin/zsh
+  become: true

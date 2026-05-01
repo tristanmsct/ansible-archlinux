@@ -1,5 +1,4 @@
 ---
-# tasks file for base/pacman
 - name: Modify makepkg configuration
   lineinfile:
     path: /etc/makepkg.conf
@@ -21,14 +20,13 @@
     backrefs: yes
   with_items:
     - Color
-    - ParallelDownloads
     - CheckSpace
   become: true
 
-- name: Modify pacman configuration
+- name: Enable pacman parrallel downloads
   lineinfile:
     path: /etc/pacman.conf
-    regexp: '^#?\s*{{ item.key }}'
+    regexp: '^#?\s*{{ item.key }}\s*=?.*'
     line: "{{ item.key }} = {{ item.value }}"
     backrefs: yes
   with_items:
@@ -36,10 +34,39 @@
       value: "{{ [ansible_facts['processor_vcpus'], 8] | min }}"
   become: true
 
-- name: Add ILoveCandy to pacman.conf
+- name: Enable pacman ILoveCandy
   lineinfile:
     path: /etc/pacman.conf
     insertafter: '^Color$'
     line: "ILoveCandy"
     state: present
+  become: true
+
+# --- reflector -------------------------------------------------------------------------
+- name: Install reflector
+  pacman:
+    name:
+      - reflector
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Start reflector
+  ansible.builtin.systemd_service:
+    name: reflector.timer
+    enabled: yes
+    state: started
+
+# --- Pacman hook Grub silencer ---------------------------------------------------------
+- name: Ensure pacman hooks dir exists
+  file:
+    path: /etc/pacman.d/hooks
+    state: directory
+    mode: '0755'
+
+- name: Deploy pacman hook
+  template:
+    src: grub-quiet.hook.j2
+    dest: /etc/pacman.d/hooks/grub-quiet.hook
+    mode: '0644'
   become: true

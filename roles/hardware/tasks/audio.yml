@@ -12,14 +12,14 @@
     update_cache: yes
   become: true
 
-- name: Start Apache service
-  ansible.builtin.service:
+- name: Start pipewire service
+  ansible.builtin.systemd_service:
     name: pipewire
     state: started
     scope: user
 
-- name: Start Apache service
-  ansible.builtin.service:
+- name: Start wireplumber service
+  ansible.builtin.systemd_service:
     name: wireplumber
     state: started
     scope: user

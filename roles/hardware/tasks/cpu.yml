@@ -1,0 +1,13 @@
+---
+- name: Install Intel packages
+  community.general.pacman:
+    name:
+      - intel-ucode
+      - vulkan-intel
+      - mesa
+      - intel-media-driver
+      - libva-utils
+      - libva-intel-driver
+    state: present
+  become: yes
+  when: "'Intel' in ansible_processor | join"

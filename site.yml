@@ -1,0 +1,14 @@
+---
+- name: Arch Linux Setup
+  hosts: localhost
+  gather_facts: true
+
+  roles:
+    - { role: base, tags: ['base'] }
+    - { role: system, tags: ['system'] }
+    - { role: hardware, tags: ['hardware'] }
+    - { role: desktop, tags: ['desktop'] }
+    - { role: theming, tags: ['theming'] }
+    - { role: dev, tags: ['dev'] }
+    - { role: cli, tags: ['cli'] }
+    - { role: apps, tags: ['apps'] }

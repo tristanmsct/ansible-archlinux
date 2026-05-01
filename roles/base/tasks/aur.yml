@@ -1,10 +1,26 @@
 ---
-- name: Check if yay is installed
-  stat:
+- name: Create AUR builder user
+  ansible.builtin.user:
+    name: aur_builder
+    create_home: yes
+    home: /var/cache/aur_builder
+    shell: /bin/bash        # needs real shell for makepkg
+    password: '!'
+    groups: []
+  become: true
+
+- name: Allow aur_builder passwordless pacman
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/11-aur
+    content: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman\n"
+    mode: '0440'
+    validate: 'visudo -cf %s'
+  become: true
+
+- name: Check yay installed
+  ansible.builtin.stat:
     path: /usr/bin/yay
   register: yay_binary
-  tags:
-    - aur
 
 - name: Install yay
   block:
@@ -29,9 +45,3 @@
         chdir: /tmp/yay
       become: true
   when: not yay_binary.stat.exists
-  tags:
-    - aur
-
-# - name: AUR install clean up
-#   command: yay -Yc
-#   become: true

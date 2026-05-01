@@ -1,0 +1,12 @@
+---
+# - name: Set up CachyOS kernel
+#   import_tasks: cachyos.yml
+#   tags: cachyos
+
+- name: Configure system performance
+  import_tasks: performance.yml
+  tags: performance
+
+- name: Configure service hardening
+  import_tasks: hardening.yml
+  tags: hardening
