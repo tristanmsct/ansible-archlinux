@@ -1,0 +1,87 @@
+---
+- name: Install Hyprland and main dependencies
+  community.general.pacman:
+    name:
+    - hyprland
+    - hyprland-protocols
+    - wayland
+    - wayland-protocols
+    - xdg-desktop-portal-hyprland
+    - xdg-desktop-portal-gtk
+    - hyprpolkitagent
+    - polkit-gnome
+    - gnome-keyring
+    - hyprsunset
+    - hypridle
+    - cmake
+    - cpio
+    state: present
+  become: true
+
+- name: Install other desktop tools
+  community.general.pacman:
+    name:
+    - hyprpicker
+    - dunst
+    - cliphist
+    - grim
+    - slurp
+    - brightnessctl
+    - cava
+    state: present
+  become: true
+
+- name: Set up Hyprsunset user service
+  ansible.builtin.systemd_service:
+    name: hyprsunset.timer
+    enabled: true
+    state: started
+    scope: user
+
+- name: Install Waypaper
+  kewlfft.aur.aur:
+    name:
+      - waypaper-git
+      - awww-git
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install autorotation sensors
+  kewlfft.aur.aur:
+    name:
+      - iio-hyprland-git
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+# - name: Get installed Hyprpm plugins
+#   command: hyprpm list
+#   register: hyprpm_list
+#   changed_when: false
+#   failed_when: false
+
+# - name: Update Hyprpm
+#   command: hyprpm update
+#   changed_when: false
+#   failed_when: false
+
+# - name: Add Hyprsplit
+#   shell: echo y | hyprpm add https://github.com/shezdy/hyprsplit
+#   when: "'hyprsplit' not in hyprpm_list.stdout"
+#   changed_when: true
+
+# - name: Enable Hyprsplit
+#   command: hyprpm enable hyprsplit
+#   when: "'hyprsplit' not in hyprpm_list.stdout"
+#   changed_when: true
+
+# - name: Add Hyprgrass
+#   command: echo y | hyprpm add https://github.com/horriblename/hyprgrass
+#   when: "'hyprgrass' not in hyprpm_list.stdout"
+#   changed_when: true
+
+# - name: Enable Hyprgrass
+#   command: hyprpm enable hyprgrass
+#   when: "'hyprgrass' not in hyprpm_list.stdout"
+#   changed_when: true

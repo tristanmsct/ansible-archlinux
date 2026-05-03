@@ -1,6 +1,6 @@
 ---
 - name: Install backup tools
-  pacman:
+  community.general.pacman:
     name:
       - timeshift
       - pika-backup

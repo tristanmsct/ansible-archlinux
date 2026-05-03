@@ -10,3 +10,11 @@
 - name: Install terminal tools
   import_tasks: tools.yml
   tags: cli-tools
+
+- name: Install and configure firewall
+  import_tasks: ufw.yml
+  tags: ufw
+
+- name: Install and configure TLP for power management
+  import_tasks: tlp.yml
+  tags: tlp

@@ -1,0 +1,20 @@
+---
+- name: Install Nautilus
+  community.general.pacman:
+    name:
+      - nautilus
+      - sushi
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Get current button-layout
+  command: gsettings get org.gnome.desktop.wm.preferences button-layout
+  register: button_layout
+  changed_when: false
+
+- name: Remove window manager buttons
+  command: gsettings set org.gnome.desktop.wm.preferences button-layout ':'
+  when: button_layout.stdout != "':'"
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ ansible_facts['user_uid'] }}/bus"

@@ -1,6 +1,6 @@
 ---
 - name: Install CLI tools
-  pacman:
+  community.general.pacman:
     name:
       - fzf
       - zoxide
@@ -14,6 +14,31 @@
       - tldr
       - thefuck
       - btop
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install trash-cli
+  community.general.pacman:
+    name:
+      - trash-cli
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Start trash-cli service
+  ansible.builtin.systemd_service:
+    name: empty-trash.timer
+    enabled: true
+    scope: user
+
+- name: Install other usefull cli tools
+  community.general.pacman:
+    name:
+      - unzip
+      - fastfetch
+      - ddcutils
+      - figlet
     state: present
     update_cache: yes
   become: true

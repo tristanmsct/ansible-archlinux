@@ -27,7 +27,7 @@
   become: yes
 
 - name: Install ZRAM package
-  pacman:
+  community.general.pacman:
     name:
       - zram-generator
     state: present

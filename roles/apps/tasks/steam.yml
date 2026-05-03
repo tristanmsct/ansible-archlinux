@@ -1,0 +1,22 @@
+---
+- name: Enable multilib repository
+  replace:
+    path: /etc/pacman.conf
+    regexp: '#\[multilib\]\n#Include'
+    replace: '[multilib]\nInclude'
+  become: true
+
+- name: Install Steam
+  community.general.pacman:
+    name:
+      - steam
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install rofi-grames
+  kewlfft.aur.aur:
+    name:
+      - rofi-games
+  become: yes
+  become_user: "{{ aur.user }}"

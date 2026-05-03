@@ -1,12 +1,11 @@
 ---
-# - name: Configure Git
-#   community.general.git_config:
-#     name: "{{ item.name }}"
-#     value: "{{ item.value }}"
-#     scope: global
-#   loop:
-#     - { name: 'user.name', value: "{{ git_user_name }}" }
-#     - { name: 'user.email', value: "{{ git_user_email }}" }
-
-- debug:
-    msg: "Installing Git {{ username }}"
+- name: Install Git and other tools
+  community.general.pacman:
+    name:
+      - git
+      - git-crypt
+      - meld
+      - age
+    state: present
+    update_cache: yes
+  become: true

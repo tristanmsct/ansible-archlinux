@@ -1,8 +1,8 @@
 ---
-- name: Install Vimix Cursors
+- name: Install Nextcloud
   community.general.pacman:
     name:
-      - vimix-cursors
+      - nextcloud-client
     state: present
     update_cache: yes
   become: true

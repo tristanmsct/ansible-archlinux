@@ -41,6 +41,6 @@
   become: true
 
 - name: Update pacman database
-  pacman:
+  community.general.pacman:
     update_cache: yes
   become: true

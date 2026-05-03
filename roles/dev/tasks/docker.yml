@@ -1,0 +1,16 @@
+---
+- name: Install Docker engine
+  community.general.pacman:
+    name:
+      - docker
+      - docker-compose
+      - docker-buildx
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Add user to Docker group
+  ansible.builtin.user:
+    name: "{{ ansible_facts['user_id'] }}"
+    groups: docker
+    append: true

@@ -1,18 +1,14 @@
 ---
 - name: Set Tela Circle variables
   set_fact:
-    repo_url: "git@github.com:tristanmsct/tela-circle-icon-theme-git.git"
+    repo_url: "https://github.com/tristanmsct/tela-circle-icon-theme-git.git"
     repo_dest: "{{ user_home }}/.local/share/aur/tela-circle-icon-theme-git"
     check_path: "/usr/share/icons/Tela-circle-blue"
-  tags:
-    - tela-circle
 
 - name: Check if Tela Circle theme is already installed
   stat:
     path: "{{ check_path }}"
   register: tela_circle_installed
-  tags:
-    - tela-circle
 
 - name: Install Tela Circle Theme
   block:
@@ -43,5 +39,3 @@
       loop: "{{ lookup('fileglob', repo_dest + '/*.pkg.tar.zst', repo_dest + '/*.src.tar.gz', wantlist=True) }}"
 
   when: not tela_circle_installed.stat.exists
-  tags:
-    - tela-circle

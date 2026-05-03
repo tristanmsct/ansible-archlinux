@@ -1,6 +1,6 @@
 ---
 - name: Install bluetooth dependencies
-  pacman:
+  community.general.pacman:
     name:
       - bluez
       - bluez-utils
@@ -15,7 +15,7 @@
   become: yes
   become_user: "{{ aur.user }}"
 
-- name: Start Apache service
+- name: Start bluetooth service
   ansible.builtin.systemd_service:
     name: bluetooth
     state: started

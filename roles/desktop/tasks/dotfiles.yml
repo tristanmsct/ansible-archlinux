@@ -1,0 +1,46 @@
+---
+- name: Install chezmoi
+  community.general.pacman:
+    name: chezmoi
+    state: present
+  become: true
+
+- name: Ensure Chezmoi config dir exists
+  file:
+    path: "{{ user_home }}/.config/chezmoi"
+    state: directory
+    mode: "0755"
+
+- name: Write Chezmoi config
+  copy:
+    dest: "{{ user_home }}/.config/chezmoi/chezmoi.toml"
+    mode: "0644"
+    content: |
+      sourceDir = "{{ user_home }}/.local/share/dotfiles"
+      encryption = "age"
+      editor = "codium --wait"
+      persistentState = "{{ user_home }}/.local/share/chezmoi/chezmoistate.boltdb"
+
+      [age]
+          identity = "{{ user_home }}/.config/chezmoi/key.txt"
+          symmetric = true
+
+      [diff]
+          pager = "delta"
+
+- name: Ensure dotfiles source dir exists
+  file:
+    path: "{{ user_home }}/.local/share/dotfiles"
+    state: directory
+    mode: "0755"
+
+- name: Clone dotfiles repo
+  git:
+    repo: "https://github.com/tristanmsct/dotfiles.git"
+    dest: "{{ user_home }}/.local/share/dotfiles"
+    update: false
+
+- name: Apply Chezmoi
+  command: chezmoi apply --verbose
+  register: chezmoi_apply
+  changed_when: chezmoi_apply.stdout != ""

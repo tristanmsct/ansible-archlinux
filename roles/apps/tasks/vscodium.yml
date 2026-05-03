@@ -1,0 +1,28 @@
+---
+- name: Install VSCodium
+  kewlfft.aur.aur:
+    name:
+      - vscodium
+      - vscodium-marketplace
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install VSCodium extensions
+  command: "{{ config_dir }}/hypr/launchers/codium.sh --install-extension {{ item }}"
+  loop:
+    - ms-python.python
+    - ms-python.flake8
+    - ms-python.debugpy
+    - ms-python.vscode-python-envs
+    - ms-toolsai.jupyter
+    - bungcip.better-toml
+    - docker.docker
+    - ms-azuretools.vscode-containers
+    - eamodio.gitlens
+    - dlasagno.rasi
+    - mousavian.ssh-config-syntax-highlighter
+    - eww-yuck.yuck
+  register: ext_install
+  changed_when: "'already installed' not in ext_install.stdout"
+  become: false

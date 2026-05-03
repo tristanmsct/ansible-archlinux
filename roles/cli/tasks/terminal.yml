@@ -1,23 +1,29 @@
-- name: Install kitty terminal emulator
-  pacman:
+---
+- name: Install Kitty terminal emulator
+  community.general.pacman:
     name:
       - kitty
     state: present
     update_cache: yes
   become: true
 
+- name: Install some shell tools
+  community.general.pacman:
+    name:
+      - bash-completion
+    state: present
+    update_cache: yes
+  become: true
+
 - name: Install oh-my-zsh
-  ansible.builtin.command:
-    cmd: yay -S --noconfirm --needed {{ item }}
+  kewlfft.aur.aur:
+    name:
+      - oh-my-zsh-git
   become: yes
-  become_user: aur_builder
-  loop:
-    - oh-my-zsh-git
-  register: yay_result
-  changed_when: "'nothing to do' not in yay_result.stdout"
+  become_user: "{{ aur.user }}"
 
 - name: Install other zsh plugins
-  pacman:
+  community.general.pacman:
     name:
       - zsh-syntax-highlighting
       - zsh-autosuggestions
@@ -26,25 +32,19 @@
   become: true
 
 - name: Install other zsh plugins from the AUR
-  ansible.builtin.command:
-    cmd: yay -S --noconfirm --needed {{ item }}
+  kewlfft.aur.aur:
+    name:
+      - zsh-fast-syntax-highlighting
   become: yes
-  become_user: aur_builder
-  loop:
-    - zsh-fast-syntax-highlighting
-  register: yay_result
-  changed_when: "'nothing to do' not in yay_result.stdout"
+  become_user: "{{ aur.user }}"
 
 - name: Install zsh themes
-  ansible.builtin.command:
-    cmd: yay -S --noconfirm --needed {{ item }}
+  kewlfft.aur.aur:
+    name:
+      - zsh-theme-powerlevel10k-git
+      - oh-my-posh
   become: yes
-  become_user: aur_builder
-  loop:
-    - zsh-theme-powerlevel10k-git
-    - oh-my-posh
-  register: yay_result
-  changed_when: "'nothing to do' not in yay_result.stdout"
+  become_user: "{{ aur.user }}"
 
 - name: Configure ZDOTDIR in /etc/zsh/zshenv
   ansible.builtin.copy:

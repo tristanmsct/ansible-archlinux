@@ -1,0 +1,7 @@
+---
+- name: Install Brave
+  kewlfft.aur.aur:
+    name:
+      - brave-bin
+  become: yes
+  become_user: "{{ aur.user }}"

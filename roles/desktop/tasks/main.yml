@@ -1,1 +1,16 @@
 ---
+- name: Configure Bitwarden
+  import_tasks: bitwarden.yml
+  tags: bitwarden
+
+- name: Install and apply dotfiles with Chezmoi
+  import_tasks: dotfiles.yml
+  tags: dotfiles
+
+- name: Install Hyprland desktop
+  import_tasks: hyprland.yml
+  tags: hyprland
+
+- name: Install SDDM
+  import_tasks: sddm.yml
+  tags: sddm

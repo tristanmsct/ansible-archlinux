@@ -1,1 +1,32 @@
 ---
+- name: Install brave
+  import_tasks: brave.yml
+  tags: brave
+
+- name: Install nautilus
+  import_tasks: nautilus.yml
+  tags: nautilus
+
+- name: Install VSCodium
+  import_tasks: vscodium.yml
+  tags: vscodium
+
+- name: Install NWG-Apps
+  import_tasks: nwg-apps.yml
+  tags: nwg-apps
+
+- name: Install ProtonVPN
+  import_tasks: protonvpn.yml
+  tags: protonvpn
+
+- name: Install Steam
+  import_tasks: steam.yml
+  tags: steam
+
+- name: Install Nextcloud
+  import_tasks: nextcloud.yml
+  tags: nextcloud
+
+- name: Install misc software
+  import_tasks: misc.yml
+  tags: misc-software

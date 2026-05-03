@@ -1,0 +1,14 @@
+---
+- name: Install TLP
+  community.general.pacman:
+    name:
+      - tlp
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Start TLP service
+  ansible.builtin.systemd_service:
+    name: tlp
+    enabled: yes
+    state: started

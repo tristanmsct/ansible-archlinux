@@ -1,0 +1,14 @@
+---
+- name: Install Go-task
+  community.general.pacman:
+    name:
+      - go-task
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Create task symlink
+  ansible.builtin.file:
+    src: /usr/bin/go-task
+    dest: /usr/local/bin/task
+    state: link

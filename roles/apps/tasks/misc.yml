@@ -1,0 +1,107 @@
+---
+- name: Install Slack
+  kewlfft.aur.aur:
+    name:
+      - slack-desktop
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install Typora
+  kewlfft.aur.aur:
+    name:
+      - typora
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install Gnome podcast
+  community.general.pacman:
+    name:
+      - gnome-podcasts
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install Sublime Text
+  kewlfft.aur.aur:
+    name:
+      - sublime-text-4
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install Firefox
+  community.general.pacman:
+    name:
+      - firefox
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install Onlyoffice
+  kewlfft.aur.aur:
+    name:
+      - onlyoffice
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install MPV
+  community.general.pacman:
+    name:
+      - mpv
+      - celluloid
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install Fuse2 for JMTPFS
+  community.general.pacman:
+    name:
+      - fuse2
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install JMTPFS
+  kewlfft.aur.aur:
+    name:
+      - jmtpfs
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install Brother Printer drivers
+  kewlfft.aur.aur:
+    name:
+      - brscan3
+      - brother-dcp195c
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install some other software
+  community.general.pacman:
+    name:
+      - evince
+      - mission-center
+      - gnome-calendar
+      - gnome-calculator
+      - gnome-disk-utility
+      - cups
+      - simple-scan
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install terminal animations
+  kewlfft.aur.aur:
+    name:
+      - asciiquarium
+      - cbonsai
+      - cmatrix
+      - cava
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"

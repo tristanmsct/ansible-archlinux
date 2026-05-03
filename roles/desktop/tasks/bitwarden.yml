@@ -1,0 +1,82 @@
+---
+- name: Check if chezmoi key already exists
+  stat:
+    path: "{{ user_home }}/.config/chezmoi/key.txt"
+  register: chezmoi_key_stat
+
+- name: Bitwarden block
+  when: not chezmoi_key_stat.stat.exists
+  block:
+    - debug:
+        msg: "chezmoi key not found, fetching from Bitwarden"
+
+    - name: Install Bitwarden CLI
+      community.general.pacman:
+        name: bitwarden-cli
+        state: present
+      become: true
+
+    - name: Prompt for Bitwarden server URL
+      pause:
+        prompt: "Bitwarden server URL (Enter for vault.bitwarden.com)"
+      register: bw_server_input
+
+    - name: Prompt for Bitwarden username
+      pause:
+        prompt: "Bitwarden username (email)"
+      register: bw_username_input
+
+    - name: Prompt for Bitwarden password
+      pause:
+        prompt: "Bitwarden master password (hidden)"
+        echo: false
+      register: bw_password_input
+
+    - name: Logout Bitwarden before server config (idempotent)
+      command: bw logout
+      changed_when: true
+      failed_when: false
+
+    - name: Set Bitwarden server
+      command: bw config server {{ bw_server_input.user_input | default('https://vault.bitwarden.com', true) }}
+      changed_when: true
+
+    - name: Login to Bitwarden
+      command: >
+        bw login
+        {{ bw_username_input.user_input }}
+        {{ bw_password_input.user_input }}
+        --raw
+      register: bw_session
+      changed_when: true
+      no_log: true
+
+    - name: Fetch chezmoikey from vault
+      command: bw get notes "Chezmoi AGE key" --session {{ bw_session.stdout }}
+      register: chezmoi_key_value
+      changed_when: false
+      no_log: true
+
+    - name: Ensure chezmoi config dir exists
+      file:
+        path: "{{ user_home }}/.config/chezmoi"
+        state: directory
+        mode: "0700"
+
+    - name: Write chezmoi key file
+      copy:
+        content: "{{ chezmoi_key_value.stdout }}"
+        dest: "{{ user_home }}/.config/chezmoi/key.txt"
+        mode: "0600"
+      no_log: true
+
+    - name: Logout from Bitwarden
+      command: bw logout
+      changed_when: true
+      no_log: true
+
+    - name: Uninstall Bitwarden CLI
+      community.general.pacman:
+        name: bitwarden-cli
+        state: absent
+      become: true

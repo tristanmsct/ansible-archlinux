@@ -1,1 +1,16 @@
 ---
+- name: Install and configure git
+  import_tasks: git.yml
+  tags: git
+
+- name: Install and configure docker
+  import_tasks: docker.yml
+  tags: docker
+
+- name: Install and configure python packages
+  import_tasks: python.yml
+  tags: python
+
+- name: Install and configure go-task
+  import_tasks: gotask.yml
+  tags: gotask

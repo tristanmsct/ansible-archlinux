@@ -1,6 +1,6 @@
 ---
 - name: Install audio dependencies
-  pacman:
+  community.general.pacman:
     name:
       - pipewire
       - pipewire-pulse
@@ -8,17 +8,19 @@
       - pipewire-jack
       - sof-firmware
       - alsa-utils
+      - wireplumber
+      - ffmpg
     state: present
     update_cache: yes
   become: true
 
-- name: Start pipewire service
+- name: Start Pipewire service
   ansible.builtin.systemd_service:
     name: pipewire
     state: started
     scope: user
 
-- name: Start wireplumber service
+- name: Start Wireplumber service
   ansible.builtin.systemd_service:
     name: wireplumber
     state: started

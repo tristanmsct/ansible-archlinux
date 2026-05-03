@@ -1,18 +1,14 @@
 ---
 - name: Set Orchis variables
   set_fact:
-    repo_url: "git@github.com:tristanmsct/orchis-theme-git.git"
+    repo_url: "https://github.com/tristanmsct/orchis-theme-git.git"
     repo_dest: "{{ user_home }}/.local/share/aur/orchis-theme-git"
     check_path: "/usr/share/themes/Orchis-Blue-Dark-Compact"
-  tags:
-    - orchis
 
 - name: Check if Orchis theme is already installed
   stat:
     path: "{{ check_path }}"
   register: orchis_installed
-  tags:
-    - orchis
 
 - name: Install Orchis Theme
   block:
@@ -43,5 +39,3 @@
       loop: "{{ lookup('fileglob', repo_dest + '/*.pkg.tar.zst', repo_dest + '/*.src.tar.gz', wantlist=True) }}"
 
   when: not orchis_installed.stat.exists
-  tags:
-    - orchis
