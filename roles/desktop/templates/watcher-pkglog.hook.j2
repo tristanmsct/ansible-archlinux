@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Saving package state...
+When = PostTransaction
+Exec = /usr/bin/env HOME=/home/{{ username }} /home/{{ username }}/.local/bin/watcher.d/pkglog save

@@ -12,7 +12,8 @@
 - name: Allow aur_builder passwordless pacman
   ansible.builtin.copy:
     dest: /etc/sudoers.d/11-aur
-    content: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman\n"
+    content: |
+      aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman
     mode: '0440'
     validate: 'visudo -cf %s'
   become: true

@@ -44,3 +44,24 @@
   command: chezmoi apply --verbose
   register: chezmoi_apply
   changed_when: chezmoi_apply.stdout != ""
+
+- name: Allow watcher script to run some commands
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/50-watcher-cache
+    content: |
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/du -sh /var/cache/pacman/pkg
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/du -sh /var/lib/docker
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/find /var/cache/pacman/pkg -maxdepth 1 -name download-*
+
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/du -s /var/lib/docker
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/du -s /var/cache/pacman/pkg
+    mode: '0440'
+    validate: 'visudo -cf %s'
+  become: true
+
+- name: Deploy watcher pkglog hook
+  template:
+    src: watcher-pkglog.hook.j2
+    dest: /etc/pacman.d/hooks/watcher-pkglog.hook
+    mode: '0644'
+  become: true

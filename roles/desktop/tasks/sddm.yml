@@ -10,3 +10,44 @@
   ansible.builtin.systemd_service:
     name: sddm
     enabled: true
+
+- name: Create SDDM user config
+  ansible.builtin.copy:
+    dest: /etc/sddm.conf.d/users.conf
+    content: |
+      [Users]
+      HideUsers=aur_builder
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Install Eucalyptus drop theme
+  kewlfft.aur.aur:
+    name:
+      - sddm-eucalyptus-drop
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Allow theming script to manage SDDM theme
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/50-sddm-theme
+    content: |
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/rm /usr/share/sddm/themes/eucalyptus-drop/Backgrounds/*
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/cp * /usr/share/sddm/themes/eucalyptus-drop/Backgrounds/*
+      {{ username }} ALL=(ALL) NOPASSWD: /usr/bin/tee /usr/share/sddm/themes/eucalyptus-drop/theme.conf
+    mode: '0440'
+    validate: 'visudo -cf %s'
+  become: true
+
+- name: Switch to Eucalyptus-drop theme for SDDM
+  lineinfile:
+    path: /etc/sddm.conf.d/sddm.conf
+    regexp: '^#?\s*{{ item.key }}'
+    line: "{{ item.key }}={{ item.value }}"
+    backrefs: yes
+  with_items:
+    - key: Current
+      value: eucalyptus-drop
+  become: true
