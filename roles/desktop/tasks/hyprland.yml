@@ -4,6 +4,8 @@
     name:
     - hyprland
     - hyprland-protocols
+    - hyprlang
+    - hyprwayland-scanner
     - wayland
     - wayland-protocols
     - xdg-desktop-portal-hyprland
@@ -15,6 +17,7 @@
     - hypridle
     - cmake
     - cpio
+    - glm
     state: present
   become: true
 
@@ -22,12 +25,15 @@
   community.general.pacman:
     name:
     - hyprpicker
+    - hyprlock
     - dunst
     - cliphist
     - grim
     - slurp
     - brightnessctl
     - cava
+    - waybar
+    - otf-font-awesome  # For waybar
     state: present
   become: true
 
@@ -46,6 +52,21 @@
     state: present
   become: yes
   become_user: "{{ aur.user }}"
+
+- name: Install Eww
+  kewlfft.aur.aur:
+    name:
+      - eww
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install SASS for Eww
+  community.general.pacman:
+    name:
+      - sassc
+    state: present
+  become: true
 
 - name: Install autorotation sensors
   kewlfft.aur.aur:

@@ -1,4 +1,11 @@
 ---
+- name: Install Pacman scripts and tools
+  community.general.pacman:
+    name:
+    - pacman-contrib
+    state: present
+  become: true
+
 - name: Modify makepkg configuration
   lineinfile:
     path: /etc/makepkg.conf

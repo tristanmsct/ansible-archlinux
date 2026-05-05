@@ -72,4 +72,3 @@ TODO :
  - [X] Add the remaining sudoers files and also sort them
  - [X] Port pacman hooks
  - [ ] Add remaining explicitely installed packages
- - [ ] Backlight at startup https://www.reddit.com/r/archlinux/comments/1t2fo6s/plymouth_has_0_backlight_on_my_thinkpad_t14_gen2/

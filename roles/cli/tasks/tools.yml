@@ -2,6 +2,8 @@
 - name: Install CLI tools
   community.general.pacman:
     name:
+      - vim
+      - neovim
       - fzf
       - zoxide
       - fd
@@ -39,6 +41,9 @@
       - fastfetch
       - ddcutils
       - figlet
+      - gum
+      - imagemagick
+      - jq
     state: present
     update_cache: yes
   become: true

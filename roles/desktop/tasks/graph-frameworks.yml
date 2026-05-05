@@ -1,0 +1,13 @@
+---
+- name: Install some graphical framework packages
+  community.general.pacman:
+    name:
+    - breeze
+    - gtk4
+    - gtk4-layer-shell
+    - qt6ct
+    - libadwaita
+    # - kwalletmanager
+    # - kwallet-pam
+    state: present
+  become: true

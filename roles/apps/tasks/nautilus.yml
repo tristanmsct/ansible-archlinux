@@ -4,6 +4,8 @@
     name:
       - nautilus
       - sushi
+      - gvfs
+      - gvfs-smb
     state: present
     update_cache: yes
   become: true

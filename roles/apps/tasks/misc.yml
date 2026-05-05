@@ -11,6 +11,7 @@
   kewlfft.aur.aur:
     name:
       - typora
+      - noto-fonts-emoji
     state: present
   become: yes
   become_user: "{{ aur.user }}"
@@ -91,6 +92,9 @@
       - gnome-disk-utility
       - cups
       - simple-scan
+      - pdfarranger
+      - rofi
+      - rofi-emoji
     state: present
     update_cache: yes
   become: true
@@ -105,3 +109,11 @@
     state: present
   become: yes
   become_user: "{{ aur.user }}"
+
+- name: Some complimentary apps and dependencies
+  community.general.pacman:
+    name:
+      - libdvdcss
+    state: present
+    update_cache: yes
+  become: true

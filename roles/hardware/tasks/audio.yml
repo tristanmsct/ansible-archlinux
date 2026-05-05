@@ -9,7 +9,18 @@
       - sof-firmware
       - alsa-utils
       - wireplumber
-      - ffmpg
+      - ffmpeg
+      - pavucontrol
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install some audio plugins
+  community.general.pacman:
+    name:
+      - gst-libav
+      - gst-plugin-pipewire
+      - gst-plugins-bad
     state: present
     update_cache: yes
   become: true

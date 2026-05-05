@@ -10,7 +10,9 @@
 - name: Install some shell tools
   community.general.pacman:
     name:
+      - kitty-shell-integration
       - bash-completion
+      - zsh-completion
     state: present
     update_cache: yes
   become: true
