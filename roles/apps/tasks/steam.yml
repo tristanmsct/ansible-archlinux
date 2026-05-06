@@ -20,3 +20,10 @@
       - rofi-games
   become: yes
   become_user: "{{ aur.user }}"
+
+- name: Install some dependencies
+  kewlfft.aur.aur:
+    name:
+      - lib32-libnuma
+  become: yes
+  become_user: "{{ aur.user }}"

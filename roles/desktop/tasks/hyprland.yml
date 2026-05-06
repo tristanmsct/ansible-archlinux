@@ -24,8 +24,10 @@
 - name: Install other desktop tools
   community.general.pacman:
     name:
+    - wlr-randr  # ?
     - hyprpicker
     - hyprlock
+    - wlogout
     - dunst
     - cliphist
     - grim
@@ -33,7 +35,11 @@
     - brightnessctl
     - cava
     - waybar
+    - python-pywal
     - otf-font-awesome  # For waybar
+    - ttf-fira-code
+    - ttf-firacode-nerd
+    - ttf-fira-sans
     state: present
   become: true
 
@@ -61,6 +67,14 @@
   become: yes
   become_user: "{{ aur.user }}"
 
+- name: Install Hyprmod
+  kewlfft.aur.aur:
+    name:
+      - hyprmod-git
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
 - name: Install SASS for Eww
   community.general.pacman:
     name:
@@ -68,10 +82,18 @@
     state: present
   become: true
 
-- name: Install autorotation sensors
+- name: Install autorotation sensors for laptops
   kewlfft.aur.aur:
     name:
       - iio-hyprland-git
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install input gesture library for touch screens
+  kewlfft.aur.aur:
+    name:
+      - libinput-gestures
     state: present
   become: yes
   become_user: "{{ aur.user }}"

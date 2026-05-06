@@ -3,6 +3,7 @@
   community.general.pacman:
     name:
       - uv
+      - python-pip
     state: present
     update_cache: yes
   become: true

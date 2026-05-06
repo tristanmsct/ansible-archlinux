@@ -10,3 +10,7 @@
 - name: Configure bluetooth
   import_tasks: bluetooth.yml
   tags: bluetooth
+
+- name: Configure network manager
+  import_tasks: network.yml
+  tags: network

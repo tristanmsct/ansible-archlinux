@@ -1,0 +1,7 @@
+---
+- name: Install network manager dependencies
+  kewlfft.aur.aur:
+    name:
+      - nmrs
+  become: yes
+  become_user: "{{ aur.user }}"

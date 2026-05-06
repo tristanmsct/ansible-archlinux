@@ -2,7 +2,7 @@
 - name: Install CLI tools
   community.general.pacman:
     name:
-      - vim
+      - moreutils
       - neovim
       - fzf
       - zoxide
@@ -37,13 +37,19 @@
 - name: Install other usefull cli tools
   community.general.pacman:
     name:
+      - wget
+      - wtype
       - unzip
+      - yt-dlp
+      - ckbcomp
       - fastfetch
       - ddcutils
       - figlet
       - gum
       - imagemagick
       - jq
+      - tk
+      - python-argon2-cffi
     state: present
     update_cache: yes
   become: true
