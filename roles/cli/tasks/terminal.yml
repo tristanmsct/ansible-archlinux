@@ -12,7 +12,7 @@
     name:
       - kitty-shell-integration
       - bash-completion
-      - zsh-completion
+      - zsh-completions
     state: present
     update_cache: yes
   become: true

@@ -43,7 +43,7 @@
       - yt-dlp
       - ckbcomp
       - fastfetch
-      - ddcutils
+      - ddcutil
       - figlet
       - gum
       - imagemagick

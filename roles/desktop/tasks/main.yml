@@ -12,7 +12,7 @@
   tags: hyprland
 
 - name: Install Graphical Frameworks
-  import_tasks: graph-frameworks
+  import_tasks: graph-frameworks.yml
   tags: graph-frameworks
 
 - name: Install SDDM

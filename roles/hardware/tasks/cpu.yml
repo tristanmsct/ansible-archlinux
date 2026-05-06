@@ -10,4 +10,4 @@
       - libva-intel-driver
     state: present
   become: yes
-  when: "'Intel' in ansible_processor | join"
+  when: "'Intel' in ansible_facts['processor'] | join"
