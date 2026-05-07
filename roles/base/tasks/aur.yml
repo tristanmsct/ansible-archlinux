@@ -4,7 +4,7 @@
     name: aur_builder
     create_home: yes
     home: /var/cache/aur_builder
-    shell: /bin/bash        # needs real shell for makepkg
+    shell: /usr/bin/nologin
     password: '!'
     groups: []
   become: true
