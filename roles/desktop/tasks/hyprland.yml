@@ -35,7 +35,6 @@
     - brightnessctl
     - cava
     - waybar
-    - python-pywal
     - otf-font-awesome  # For waybar
     - ttf-fira-code
     - ttf-firacode-nerd
@@ -55,6 +54,7 @@
     name:
       - waypaper-git
       - awww-git
+      - wallust
     state: present
   become: yes
   become_user: "{{ aur.user }}"

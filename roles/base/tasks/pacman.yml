@@ -49,7 +49,15 @@
     state: present
   become: true
 
-# --- reflector -------------------------------------------------------------------------
+# -- Paccache timer ---------------------------------------------------------------------
+
+- name: Start paccache timer
+  ansible.builtin.systemd_service:
+    name: paccache.timer
+    enabled: yes
+    state: started
+
+# --- Reflector -------------------------------------------------------------------------
 - name: Install reflector
   community.general.pacman:
     name:
