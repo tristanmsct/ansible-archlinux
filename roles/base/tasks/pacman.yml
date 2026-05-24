@@ -72,16 +72,30 @@
     enabled: yes
     state: started
 
-# --- Pacman hook Grub silencer ---------------------------------------------------------
+# --- Pacman hooks ----------------------------------------------------------------------
 - name: Ensure pacman hooks dir exists
   file:
     path: /etc/pacman.d/hooks
     state: directory
     mode: '0755'
 
-- name: Deploy pacman hook
+- name: Deploy pacman grub silence hook
   template:
     src: grub-quiet.hook.j2
     dest: /etc/pacman.d/hooks/grub-quiet.hook
+    mode: '0644'
+  become: true
+
+- name: Deploy paccache clean installed hook
+  template:
+    src: paccache-clean-installed.hook.j2
+    dest: /etc/pacman.d/hooks/paccache-clean-installed.hook
+    mode: '0644'
+  become: true
+
+- name: Deploy paccache clean uninstalled hook
+  template:
+    src: paccache-clean-uninstalled.hook.j2
+    dest: /etc/pacman.d/hooks/paccache-clean-uninstalled.hook
     mode: '0644'
   become: true
