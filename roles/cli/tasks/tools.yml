@@ -12,6 +12,7 @@
       - git-delta
       - ripgrep
       - ncdu
+      - dust
       - glow
       - tldr
       - thefuck
