@@ -90,6 +90,7 @@
       - gnome-calendar
       - gnome-calculator
       - gnome-disk-utility
+      - gnome-font-viewer
       - cups
       - simple-scan
       - pdfarranger
