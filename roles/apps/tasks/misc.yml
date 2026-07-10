@@ -48,6 +48,14 @@
   become: yes
   become_user: "{{ aur.user }}"
 
+- name: Install LocalSend
+  kewlfft.aur.aur:
+    name:
+      - localsend
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
 - name: Install MPV
   community.general.pacman:
     name:
