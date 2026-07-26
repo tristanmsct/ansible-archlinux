@@ -1,9 +1,10 @@
 ---
-- name: Install NWG Apps
+- name: Install Proton VPN CLI and its dependencies
   community.general.pacman:
     name:
       - wireguard-tools
       - systemd-resolvconf
+      - proton-vpn-cli
     state: present
     update_cache: yes
   become: true

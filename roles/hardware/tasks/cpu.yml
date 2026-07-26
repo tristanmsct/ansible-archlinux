@@ -3,8 +3,8 @@
   community.general.pacman:
     name:
       - intel-ucode
-      - vulkan-intel
-      - mesa
+      # - vulkan-intel
+      # - mesa
       - intel-media-driver
       - libva-utils
       - libva-intel-driver

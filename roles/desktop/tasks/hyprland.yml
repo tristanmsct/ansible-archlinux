@@ -6,13 +6,16 @@
     - hyprland-protocols
     - hyprlang
     - hyprwayland-scanner
-    - wayland
-    - wayland-protocols
+    - hyprutils
+    # - wayland
+    # - wayland-protocols
     - xdg-desktop-portal-hyprland
     - xdg-desktop-portal-gtk
     - hyprpolkitagent
     - polkit-gnome
     - gnome-keyring
+    - kwalletmanager
+    - kwallet-pam
     - hyprsunset
     - hypridle
     - cmake
@@ -24,23 +27,33 @@
 - name: Install other desktop tools
   community.general.pacman:
     name:
-    - wlr-randr  # ?
+    - wlr-randr
     - hyprpicker
     - hyprlock
     - wlogout
     - dunst
     - cliphist
+    - matugen
     - grim
     - slurp
+    - wf-recorder
     - brightnessctl
     - cava
-    - waybar
     - otf-font-awesome  # For waybar
     - ttf-fira-code
     - ttf-firacode-nerd
     - ttf-fira-sans
     state: present
   become: true
+
+# The base package is not up to date, getting the AUR version is better.
+- name: Install Waybar
+  kewlfft.aur.aur:
+    name:
+      - waybar-git
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
 
 - name: Set up Hyprsunset user service
   ansible.builtin.systemd_service:
@@ -67,28 +80,12 @@
   become: yes
   become_user: "{{ aur.user }}"
 
-- name: Install Hyprmod
-  kewlfft.aur.aur:
-    name:
-      - hyprmod-git
-    state: present
-  become: yes
-  become_user: "{{ aur.user }}"
-
 - name: Install SASS for Eww
   community.general.pacman:
     name:
       - sassc
     state: present
   become: true
-
-- name: Install autorotation sensors for laptops
-  kewlfft.aur.aur:
-    name:
-      - iio-hyprland-git
-    state: present
-  become: yes
-  become_user: "{{ aur.user }}"
 
 - name: Install input gesture library for touch screens
   kewlfft.aur.aur:

@@ -43,7 +43,7 @@
 - name: Install Onlyoffice
   kewlfft.aur.aur:
     name:
-      - onlyoffice
+      - onlyoffice-bin
     state: present
   become: yes
   become_user: "{{ aur.user }}"
@@ -59,7 +59,7 @@
 - name: Install MPV
   community.general.pacman:
     name:
-      - mpv
+      # - mpv
       - celluloid
     state: present
     update_cache: yes
@@ -94,11 +94,13 @@
   community.general.pacman:
     name:
       - evince
+      - viewnior
       - mission-center
       - gnome-calendar
       - gnome-calculator
       - gnome-disk-utility
       - gnome-font-viewer
+      - gnome-weather
       - cups
       - simple-scan
       - pdfarranger
@@ -111,9 +113,9 @@
 - name: Install terminal animations
   kewlfft.aur.aur:
     name:
-      - asciiquarium
+      - asciiquarium-transparent-git
       - cbonsai
-      - cmatrix
+      - neo-matrix
       - cava
     state: present
   become: yes

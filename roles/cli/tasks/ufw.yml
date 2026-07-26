@@ -5,13 +5,15 @@
 
 - name: Install UFW
   community.general.pacman:
-    name: ufw
+    name:
+      - ufw
     state: present
   become: true
 
 - name: Enable and start UFW service
   ansible.builtin.systemd:
-    name: ufw
+    name:
+      - ufw
     enabled: true
     state: started
   become: true

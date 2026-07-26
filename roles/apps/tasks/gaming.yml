@@ -1,0 +1,23 @@
+---
+- name: Install Boosteroid
+  kewlfft.aur.aur:
+    name:
+      - boosteroid
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
+- name: Install Mupen for N64 games
+  community.general.pacman:
+    name:
+      - mupen64plus
+    state: present
+  become: true
+
+- name: Install PCSX2
+  kewlfft.aur.aur:
+    name:
+      - pcsx2
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"

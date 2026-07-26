@@ -1,4 +1,12 @@
 ---
+# Networkmanager is a dependency of NMRs but I would rather just have it marked as explicit.
+- name: Install Networkmanager
+  community.general.pacman:
+    name:
+      - networkmanager
+    state: present
+  become: true
+
 - name: Install network manager dependencies
   kewlfft.aur.aur:
     name:

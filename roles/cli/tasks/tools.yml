@@ -3,7 +3,9 @@
   community.general.pacman:
     name:
       - moreutils
+      - yazi
       - neovim
+      - vim-runtime
       - fzf
       - zoxide
       - fd
@@ -17,6 +19,8 @@
       - tldr
       - thefuck
       - btop
+      - duf
+      - python-networkx  # For jaccuse script
     state: present
     update_cache: yes
   become: true
@@ -40,6 +44,7 @@
     name:
       - wget
       - wtype
+      - zip
       - unzip
       - yt-dlp
       - ckbcomp
@@ -51,6 +56,7 @@
       - jq
       - tk
       - python-argon2-cffi
+      - nano
     state: present
     update_cache: yes
   become: true

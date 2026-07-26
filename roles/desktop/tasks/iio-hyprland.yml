@@ -1,0 +1,41 @@
+---
+- name: Set iio-hyprland variables
+  set_fact:
+    repo_url: "https://github.com/tristanmsct/iio-hyprland-git.git"
+    repo_dest: "{{ user_home }}/.local/share/aur/iio-hyprland-git"
+    check_path: "/usr/bin/iio-hyprland"
+
+- name: Check if iio-hyprland is already installed
+  ansible.builtin.stat:
+    path: "{{ check_path }}"
+  register: iiohyprland_installed
+
+- name: Install iio-sensor for Hyprland
+  block:
+    - name: Clone iio-hyprland repo
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ repo_dest }}"
+        update: yes
+
+    - name: Run makepkg
+      command:
+        cmd: makepkg -si --noconfirm
+        chdir: "{{ repo_dest }}"
+      become: false
+
+    - name: Cleanup makepkg build artifacts
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ repo_dest }}/src"
+        - "{{ repo_dest }}/pkg"
+
+    - name: Cleanup makepkg package files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop: "{{ lookup('fileglob', repo_dest + '/*.pkg.tar.zst', repo_dest + '/*.src.tar.gz', wantlist=True) }}"
+
+  when: not iiohyprland_installed.stat.exists

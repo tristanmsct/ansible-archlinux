@@ -7,6 +7,10 @@
   import_tasks: docker.yml
   tags: docker
 
+- name: Install and configure kubernetes
+  import_tasks: kubernetes.yml
+  tags: kubernetes
+
 - name: Install and configure python packages
   import_tasks: python.yml
   tags: python

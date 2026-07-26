@@ -23,6 +23,10 @@
   import_tasks: steam.yml
   tags: steam
 
+- name: Install Gaming apps
+  import_tasks: gaming.yml
+  tags: gaming
+
 - name: Install Nextcloud
   import_tasks: nextcloud.yml
   tags: nextcloud
