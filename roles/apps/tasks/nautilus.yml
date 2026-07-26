@@ -3,7 +3,6 @@
   community.general.pacman:
     name:
       - nautilus
-      - nautilus-python
       - sushi
       - gvfs
       - gvfs-smb
