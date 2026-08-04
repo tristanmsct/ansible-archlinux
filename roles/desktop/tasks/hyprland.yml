@@ -43,6 +43,7 @@
     - ttf-fira-code
     - ttf-firacode-nerd
     - ttf-fira-sans
+    - quickshell
     state: present
   become: true
 

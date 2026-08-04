@@ -60,3 +60,10 @@
     state: present
     update_cache: yes
   become: true
+
+- name: Enable ssh-agent socket
+  ansible.builtin.systemd:
+    name: ssh-agent.socket
+    scope: user
+    enabled: true
+    state: started
