@@ -33,13 +33,6 @@
     update_cache: yes
   become: true
 
-- name: Install other zsh plugins from the AUR
-  kewlfft.aur.aur:
-    name:
-      - zsh-fast-syntax-highlighting
-  become: yes
-  become_user: "{{ aur.user }}"
-
 - name: Install zsh themes
   kewlfft.aur.aur:
     name:
