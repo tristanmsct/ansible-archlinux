@@ -3,7 +3,7 @@
   community.general.pacman:
     name:
       - nwg-drawer
-      - nwg-look
+      - nwg-look  # This is a GTK4 theme manager
       - nwg-menu
     state: present
     update_cache: yes

@@ -5,7 +5,7 @@
     - breeze
     - gtk4
     - gtk4-layer-shell
-    - qt6ct
+    - qt6ct  # This is a Qt6 theme manager
     - libadwaita
     state: present
   become: true

@@ -57,6 +57,14 @@
   become: yes
   become_user: "{{ aur.user }}"
 
+- name: Install Hyprmod
+  kewlfft.aur.aur:
+    name:
+      - hyprmod
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
 - name: Set up Hyprsunset user service
   ansible.builtin.systemd_service:
     name: hyprsunset.timer
