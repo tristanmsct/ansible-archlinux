@@ -36,7 +36,7 @@
 - name: Install zsh themes
   kewlfft.aur.aur:
     name:
-      - zsh-theme-powerlevel10k-git
+      - zsh-theme-powerlevel10k
       - ttf-meslo-nerd-font-powerlevel10k
       - oh-my-posh
   become: yes
