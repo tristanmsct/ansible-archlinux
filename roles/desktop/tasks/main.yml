@@ -11,6 +11,10 @@
   import_tasks: hyprland.yml
   tags: hyprland
 
+- name: Install Niri desktop
+  import_tasks: niri.yml
+  tags: niri
+
 - name: Install iio-sensor for Hyprland
   import_tasks: iio-hyprland.yml
   tags: iio-hyprland
