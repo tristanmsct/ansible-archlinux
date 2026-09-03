@@ -10,3 +10,7 @@
 - name: Configure service hardening
   import_tasks: hardening.yml
   tags: hardening
+
+- name: Configure journald
+  import_tasks: journald.yml
+  tags: journald

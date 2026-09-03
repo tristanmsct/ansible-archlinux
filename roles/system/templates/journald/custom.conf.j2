@@ -1,0 +1,15 @@
+[Journal]
+# Keep logs across reboots (default, but explicit)
+Storage=persistent
+
+# Disk usage caps
+SystemMaxUse=500M
+SystemMaxFileSize=50M
+MaxRetentionSec=3month
+
+# Rate limiting — default fine, listed for visibility
+RateLimitIntervalSec=30s
+RateLimitBurst=10000
+
+# Compress older entries, saves space
+Compress=yes
