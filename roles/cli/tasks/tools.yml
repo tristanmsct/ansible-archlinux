@@ -5,7 +5,6 @@
       - moreutils
       - yazi
       - neovim
-      - vim-runtime
       - fzf
       - zoxide
       - fd
