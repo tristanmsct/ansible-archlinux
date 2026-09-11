@@ -24,14 +24,6 @@
     update_cache: yes
   become: true
 
-- name: Install nvim tree plugin
-  kewlfft.aur.aur:
-    name:
-      - neovim-tree-lua-git
-    state: present
-  become: yes
-  become_user: "{{ aur.user }}"
-
 - name: Install trash-cli
   community.general.pacman:
     name:
