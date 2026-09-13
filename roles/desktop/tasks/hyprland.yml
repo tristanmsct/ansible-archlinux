@@ -5,6 +5,7 @@
     - hyprland
     - hyprland-protocols
     - hyprlang
+    - hyprpm
     - hyprwayland-scanner
     - hyprutils
     # - wayland
