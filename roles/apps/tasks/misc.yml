@@ -11,7 +11,6 @@
   kewlfft.aur.aur:
     name:
       - typora
-      - noto-fonts-emoji
     state: present
   become: yes
   become_user: "{{ aur.user }}"
@@ -128,3 +127,12 @@
     state: present
     update_cache: yes
   become: true
+
+- name: Some other optional fonts
+  kewlfft.aur.aur:
+    name:
+      - noto-fonts-emoji
+      - noto-fonts-cjk  # For Chinese, Japanese, Korean characters
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
