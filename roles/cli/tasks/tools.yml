@@ -20,6 +20,7 @@
       - btop
       - duf
       - python-networkx  # For jaccuse script
+      - pyalpm  # For jaccuse script
     state: present
     update_cache: yes
   become: true
