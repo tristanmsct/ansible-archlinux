@@ -15,7 +15,9 @@
       - ncdu
       - dust
       - glow
-      - tldr
+      - man-pages
+      - man-db
+      - tealdeer
       - thefuck
       - btop
       - duf
