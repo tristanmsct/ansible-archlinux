@@ -92,7 +92,6 @@
 - name: Install some other software
   community.general.pacman:
     name:
-      - evince
       - viewnior
       - mission-center
       - gnome-calendar
