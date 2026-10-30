@@ -39,10 +39,10 @@
     update_cache: yes
   become: true
 
-- name: Install Onlyoffice
+- name: Install Euro-Office
   kewlfft.aur.aur:
     name:
-      - onlyoffice-bin
+      - euro-office-bin
     state: present
   become: yes
   become_user: "{{ aur.user }}"
