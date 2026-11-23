@@ -17,8 +17,6 @@
     - gnome-keyring
     - kwalletmanager
     - kwallet-pam
-    - hyprsunset
-    - hypridle
     - cmake
     - cpio
     - glm
@@ -31,6 +29,8 @@
     - wlr-randr
     - hyprpicker
     - hyprlock
+    - hyprsunset
+    - hypridle
     - wlogout
     - dunst
     - cliphist
