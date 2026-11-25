@@ -57,6 +57,14 @@
   become: yes
   become_user: "{{ aur.user }}"
 
+- name: Install lua-cjson
+  kewlfft.aur.aur:
+    name:
+      - lua-cjson
+    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+
 - name: Install Hyprmod
   kewlfft.aur.aur:
     name:
